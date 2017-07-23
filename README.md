@@ -1,9 +1,9 @@
 # jscalculator
-Project of freeCodeCamp
+Project of [freeCodeCamp](https://www.freecodecamp.com/challenges/build-a-javascript-calculator)
 
-The order of actions
+The order of actions:
 
-1. [Vue-webpack-boilerplate](https://github.com/vuejs-templates/webpack) was installed
+1. Install [Vue-webpack-boilerplate](https://github.com/vuejs-templates/webpack)
 > A Vue.js project
 
 ## Build Setup
@@ -22,4 +22,13 @@ npm run build
 npm run build --report
 ```
 
-For detailed explanation on how things work, checkout the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
+2. Install [BootstrapVue](https://bootstrap-vue.js.org)
+
+## Quick Start
+```bash
+# Using YARN
+yarn add bootstrap-vue
+
+# Using NPM
+npm install --save bootstrap-vue
+```
