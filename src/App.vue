@@ -2,7 +2,8 @@
   <div id="app">
     <img src="./assets/logo.png">
     <hello></hello>
-    <CalculatorTable></CalculatorTable>
+    <CalculatorTable>
+    </CalculatorTable>
   </div>
 </template>
 
