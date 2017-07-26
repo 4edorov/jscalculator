@@ -1,13 +1,13 @@
 <template>
   <div class="main">
     <div class="display-part">
-      <DisplayTable>
+      <DisplayTable :input="input">
       </DisplayTable>
     </div>
     <div class="buttons-part">
       <div v-for="row in buttonsRows" class="button-rows">
         <div v-for="button in row">
-          <b-button size="sm" variant="primary" class="button">
+          <b-button size="sm" variant="primary" class="button" v-on:click="pressOnButton(button)">
             {{button}}
           </b-button>
         </div>
@@ -28,11 +28,21 @@ export default {
         ['4', '5', '6', '*', 'CE'],
         ['1', '2', '3', '-', '='],
         ['0', '.', '+', '+', '=']
-      ]
+      ],
+      input: ''
     }
   },
   components: {
     DisplayTable
+  },
+  methods: {
+    pressOnButton (value) {
+      if (value !== '=') {
+        this.input += value
+      } // else {
+      //   this.input = eval(this.input)
+      // }
+    }
   }
 }
 </script>
