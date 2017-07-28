@@ -41,20 +41,26 @@ export default {
       if (this.pressCount === 0) {
         this.input = ''
       }
-      this.pressCount++
 
       if (value === 'AC') {
         this.input = '0'
         this.pressCount = 0
+        return
       }
+
       if (value === '=') {
-        this.input = eval(this.input)
+        if (this.input.substr(-1).search(/[)\d]/) === 0) {
+          this.input = eval(this.input.replace(/[^-()\d/*+.]/, '') || 0).toString()
+        } else {
+          this.input = '0'
+          this.pressCount = 0
+        }
+        return
       }
-      if (value !== '=') {
-        this.input += value
-      } // else {
-      //   this.input = eval(this.input)
-      // }
+
+      this.pressCount++
+
+      this.input += value
     },
     styleButton (value) {
       if (value === 'AC' || value === 'CE') {
