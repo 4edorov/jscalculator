@@ -1,8 +1,7 @@
 <template>
   <div class="main">
     <div class="display-part">
-      <DisplayTable :input="input">
-      </DisplayTable>
+      <DisplayTable :input="input"/>
     </div>
     <div class="buttons-part">
       <div v-for="row in buttonsRows" class="button-rows">
@@ -13,6 +12,7 @@
         </div>
       </div>
     </div>
+    <b-badge pill variant="warning">4edorator</b-badge>
   </div>
 </template>
 
@@ -42,6 +42,11 @@ export default {
         this.input = ''
       }
 
+      if (this.pressCount === 0 && (value === '/' || value === '*' || value === 'AC' || value === 'CE' || value === ')')) {
+        this.input = '0'
+        return
+      }
+
       if (value === 'AC') {
         this.input = '0'
         this.pressCount = 0
@@ -50,7 +55,16 @@ export default {
 
       if (value === '=') {
         if (this.input.substr(-1).search(/[)\d]/) === 0) {
-          this.input = eval(this.input.replace(/[^-()\d/*+.]/, '') || 0).toString()
+          try {
+            this.input = eval(this.input.replace(/[^-()\d/*+.]/, '') || 0).toString()
+          } catch (e) {
+            this.input = e.message
+            setTimeout(() => {
+              this.input = '0'
+              this.pressCount = 0
+            }, 1500)
+          }
+          this.pressCount = 0
         } else {
           this.input = '0'
           this.pressCount = 0
@@ -78,7 +92,7 @@ export default {
 <style scoped>
 .main {
   width: 350px;
-  height: 370px;
+  height: 400px;
   background-color: #85adad;
   border: solid;
   border-color: black;
@@ -90,7 +104,7 @@ export default {
 }
 
 .buttons-part {
-  height: 65%;
+  height: 52%;
 }
 
 .button-rows {
