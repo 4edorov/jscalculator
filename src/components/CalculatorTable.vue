@@ -25,7 +25,7 @@ export default {
     return {
       buttonsRows: [
         ['7', '8', '9', '/', 'AC'],
-        ['4', '5', '6', '*', 'CE'],
+        ['4', '5', '6', '*', '<-'],
         ['1', '2', '3', '-', '='],
         ['0', '.', '(', '+', ')']
       ],
@@ -42,7 +42,7 @@ export default {
         this.input = ''
       }
 
-      if (this.pressCount === 0 && (value === '/' || value === '*' || value === 'AC' || value === 'CE' || value === ')')) {
+      if (this.pressCount === 0 && (value === '/' || value === '*' || value === 'AC' || value === '<-' || value === ')')) {
         this.input = '0'
         return
       }
@@ -72,12 +72,21 @@ export default {
         return
       }
 
+      if (this.pressCount > 0 && value === '<-') {
+        this.input = this.input.substring(0, this.input.length - 1)
+        this.pressCount--
+        if (this.pressCount === 0) {
+          this.input = '0'
+        }
+        return
+      }
+
       this.pressCount++
 
       this.input += value
     },
     styleButton (value) {
-      if (value === 'AC' || value === 'CE') {
+      if (value === 'AC' || value === '<-') {
         return 'danger'
       }
       if (value === '=') {
